@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esmael Eduardo — Analista de Dados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep:    #060F0F;
+    --bg-dark:    #0A1818;
+    --bg-card:    #0E2020;
+    --bg-card2:   #122626;
+    --teal:       #00D4C8;
+    --teal-bright:#00EFDF;
+    --teal-dim:   #00A89E;
+    --teal-glow:  rgba(0,212,200,0.12);
+    --teal-glow2: rgba(0,212,200,0.06);
+    --white:      #FFFFFF;
+    --off-white:  #E8F4F4;
+    --muted:      #7AADAA;
+    --faint:      #3D6B68;
+    --serif:      'Cormorant Garamond', Georgia, serif;
+    --mono:       'DM Mono', monospace;
+    --body:       'Crimson Pro', Georgia, serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--white);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--teal); color: var(--bg-deep); }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 60px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(6,15,15,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 0.5px solid rgba(0,212,200,0.15);
+  }
+  .nav-logo {
+    font-family: var(--serif); font-size: 15px; font-weight: 400;
+    letter-spacing: 0.08em; color: var(--white); text-decoration: none;
+  }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    color: var(--muted); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 60px 80px;
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse 65% 65% at 80% 40%, rgba(0,212,200,0.09) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 15% 80%, rgba(0,168,158,0.06) 0%, transparent 60%),
+      var(--bg-deep);
+  }
+  .hero::after {
+    content: '';
+    position: absolute; left: 0; top: 18%; bottom: 18%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--teal), transparent);
+    opacity: 0.35;
+  }
+  .hero-bg-text {
+    position: absolute; bottom: -60px; right: -10px;
+    font-family: var(--serif);
+    font-size: clamp(130px, 18vw, 300px);
+    font-weight: 300; color: transparent;
+    -webkit-text-stroke: 1px rgba(0,212,200,0.07);
+    line-height: 1; user-select: none; pointer-events: none;
+  }
+  .hero-ornament {
+    position: absolute; top: 130px; right: 60px;
+    width: 240px; height: 240px;
+    border: 0.5px solid rgba(0,212,200,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-ornament::before {
+    content: ''; position: absolute;
+    width: 170px; height: 170px;
+    border: 0.5px solid rgba(0,212,200,0.1); border-radius: 50%;
+  }
+  .hero-ornament-inner {
+    width: 82px; height: 82px; border-radius: 50%;
+    background: var(--teal-glow);
+    border: 1px solid rgba(0,212,200,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--teal);
+  }
+  .hero-content { max-width: 680px; }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+    color: var(--teal); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 14px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 30px; height: 1px; background: var(--teal);
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(58px, 8vw, 100px);
+    font-weight: 300; line-height: 0.92;
+    letter-spacing: -0.02em; color: var(--white);
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-name em { font-style: italic; color: var(--teal); }
+  .hero-divider {
+    width: 56px; height: 1.5px;
+    background: linear-gradient(to right, var(--teal), transparent);
+    margin: 30px 0;
+    animation: expandWidth 0.8s 0.3s ease both;
+  }
+  .hero-bio {
+    font-size: 20px; font-weight: 300;
+    color: var(--off-white); max-width: 520px; line-height: 1.65;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .hero-bio strong { font-weight: 500; color: var(--teal); }
+  .hero-cta {
+    display: flex; gap: 14px; margin-top: 42px;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+  .btn-primary {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    padding: 14px 30px;
+    background: var(--teal); color: var(--bg-deep);
+    border: none; text-decoration: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--teal-bright); transform: translateY(-2px); }
+  .btn-outline {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    padding: 14px 30px;
+    background: transparent; color: var(--teal);
+    border: 0.5px solid rgba(0,212,200,0.45);
+    text-decoration: none; cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { background: var(--teal-glow); border-color: var(--teal); transform: translateY(-2px); }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; }
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 64px; }
+  .section-num { font-family: var(--mono); font-size: 10px; color: var(--teal); letter-spacing: 0.16em; }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(34px, 4vw, 50px);
+    font-weight: 300; color: var(--white); letter-spacing: -0.01em;
+  }
+  .section-title em { font-style: italic; color: var(--teal); }
+  .section-line {
+    flex: 1; height: 0.5px;
+    background: linear-gradient(to right, rgba(0,212,200,0.3), transparent);
+    max-width: 220px;
+  }
+
+  /* SOBRE */
+  .sobre { background: var(--bg-dark); }
+  .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .sobre-text p { font-size: 19px; font-weight: 300; color: var(--off-white); line-height: 1.75; margin-bottom: 20px; }
+  .sobre-text p strong { font-weight: 500; color: var(--teal); }
+  .sobre-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(0,212,200,0.12); }
+  .stat-box { background: var(--bg-card); padding: 30px 24px; transition: background 0.2s; }
+  .stat-box:hover { background: var(--bg-card2); }
+  .stat-num { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--teal); line-height: 1; }
+  .stat-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--muted); margin-top: 6px; }
+
+  /* HABILIDADES */
+  .habilidades { background: var(--bg-deep); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(0,212,200,0.1); }
+  .skill-card {
+    background: var(--bg-deep); padding: 36px 28px;
+    position: relative; overflow: hidden; transition: background 0.3s;
+  }
+  .skill-card:hover { background: var(--bg-card); }
+  .skill-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 1.5px;
+    background: linear-gradient(to right, var(--teal), transparent);
+    transition: width 0.4s ease;
+  }
+  .skill-card:hover::after { width: 100%; }
+  .skill-icon { font-family: var(--mono); font-size: 10px; color: var(--teal); letter-spacing: 0.14em; margin-bottom: 16px; }
+  .skill-name { font-family: var(--serif); font-size: 23px; font-weight: 400; color: var(--white); margin-bottom: 8px; }
+  .skill-desc { font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.6; }
+  .skill-level { margin-top: 18px; display: flex; gap: 5px; }
+  .level-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,212,200,0.15); border: 0.5px solid rgba(0,212,200,0.2); }
+  .level-dot.active { background: var(--teal); border-color: var(--teal); }
+
+  /* PROJETOS */
+  .projetos { background: var(--bg-dark); }
+  .projetos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(0,212,200,0.1); }
+  .projeto-card {
+    background: var(--bg-dark); padding: 42px 32px;
+    position: relative; overflow: hidden; transition: background 0.3s;
+  }
+  .projeto-card:hover { background: var(--bg-card); }
+  .projeto-card::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 0; height: 0;
+    border-left: 28px solid transparent;
+    border-top: 28px solid rgba(0,212,200,0.15);
+    transition: border-color 0.3s;
+  }
+  .projeto-card:hover::before { border-top-color: rgba(0,212,200,0.35); }
+  .projeto-num { font-family: var(--mono); font-size: 10px; color: var(--faint); letter-spacing: 0.14em; margin-bottom: 22px; }
+  .projeto-title { font-family: var(--serif); font-size: 25px; font-weight: 400; color: var(--white); line-height: 1.2; margin-bottom: 12px; }
+  .projeto-desc { font-size: 16px; color: var(--muted); font-weight: 300; line-height: 1.65; margin-bottom: 24px; }
+  .projeto-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+  .projeto-tag {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+    color: var(--teal); border: 0.5px solid rgba(0,212,200,0.3);
+    padding: 3px 10px; background: var(--teal-glow2);
+  }
+  .projeto-link {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+    color: var(--muted); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s;
+  }
+  .projeto-link:hover { color: var(--teal); }
+  .projeto-link::after { content: '→'; font-size: 14px; transition: transform 0.2s; }
+  .projeto-link:hover::after { transform: translateX(4px); }
+
+  /* TOOLS */
+  .tools-wrap { background: var(--bg-deep); padding: 0 60px; }
+  .tools-strip { display: flex; gap: 1px; background: rgba(0,212,200,0.1); flex-wrap: wrap; }
+  .tool-item { flex: 1; min-width: 100px; background: var(--bg-deep); padding: 26px 20px; text-align: center; transition: background 0.2s; }
+  .tool-item:hover { background: var(--bg-card); }
+  .tool-icon-text { font-family: var(--serif); font-size: 30px; font-weight: 300; color: var(--teal); }
+  .tool-name { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; color: var(--muted); display: block; margin-top: 8px; }
+
+  /* CONTACTO */
+  .contacto {
+    background:
+      radial-gradient(ellipse 70% 70% at 50% 100%, rgba(0,212,200,0.07) 0%, transparent 70%),
+      var(--bg-dark);
+    text-align: center;
+  }
+  .contact-inner { max-width: 680px; margin: 0 auto; }
+  .contact-quote {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 300; font-style: italic;
+    color: var(--off-white); line-height: 1.35; margin-bottom: 14px;
+  }
+  .contact-quote span { color: var(--teal); font-style: normal; }
+  .contact-sub { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--teal); margin-bottom: 60px; }
+  .contact-links { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+  .contact-link { display: flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none; transition: transform 0.2s; }
+  .contact-link:hover { transform: translateY(-5px); }
+  .contact-link-icon {
+    width: 56px; height: 56px;
+    border: 0.5px solid rgba(0,212,200,0.3);
+    background: var(--teal-glow2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 20px; color: var(--teal);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .contact-link:hover .contact-link-icon { background: var(--teal-glow); border-color: var(--teal); }
+  .contact-link-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    border-top: 0.5px solid rgba(0,212,200,0.12);
+    padding: 28px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg-deep);
+  }
+  .footer-name { font-family: var(--serif); font-size: 14px; color: var(--muted); }
+  .footer-copy { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--faint); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes expandWidth { from { width: 0; } to { width: 56px; } }
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav, section, footer, .tools-wrap { padding-left: 24px; padding-right: 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-ornament { display: none; }
+    .sobre-grid { grid-template-columns: 1fr; gap: 40px; }
+    .skills-grid, .projetos-grid { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .skills-grid, .projetos-grid { grid-template-columns: 1fr; }
+    .contact-links { gap: 24px; }
+    .hero-bg-text { font-size: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">E<span>.</span>Eduardo</a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#habilidades">Habilidades</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-bg-text">DATA</div>
+  <div class="hero-ornament"><div class="hero-ornament-inner">EM</div></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Analista de Dados Junior</div>
+    <h1 class="hero-name">Esmael<br><em>Eduardo</em></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-bio">
+      Transformo dados em <strong>decisões claras</strong>. Trabalho com Python, SQL e Power BI para extrair padrões, construir visualizações e contar histórias que fazem sentido para quem precisa delas.
+    </p>
+    <div class="hero-cta">
+      <a href="#projetos" class="btn-primary">Ver Projetos</a>
+      <a href="#contacto" class="btn-outline">Entre em Contacto</a>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="sobre">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Sobre <em>mim</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="sobre-grid">
+    <div class="sobre-text reveal">
+      <p>Sou <strong>Esmael Eduardo</strong>, analista de dados júnior com foco em transformar informação bruta em valor real para organizações. Acredito que os dados bem trabalhados são uma vantagem competitiva — e que a clareza visual é tão importante quanto a precisão técnica.</p>
+      <p>O meu percurso combina rigor analítico com atenção ao detalhe. Trabalho com ferramentas modernas de análise e visualização, e estou em constante aprendizado para acompanhar o ritmo acelerado da área de dados.</p>
+      <p>Disponível para <strong>oportunidades de colaboração</strong>, projectos freelance e posições em equipas de dados.</p>
+    </div>
+    <div class="sobre-stats reveal">
+      <div class="stat-box"><div class="stat-num">5+</div><div class="stat-label">FERRAMENTAS DOMINADAS</div></div>
+      <div class="stat-box"><div class="stat-num">∞</div><div class="stat-label">CURIOSIDADE POR DADOS</div></div>
+      <div class="stat-box"><div class="stat-num">Jr</div><div class="stat-label">NÍVEL ACTUAL</div></div>
+      <div class="stat-box"><div class="stat-num">100%</div><div class="stat-label">COMPROMETIMENTO</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="habilidades" class="habilidades">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Habilidades <em>&amp; Ferramentas</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">— 01</div>
+      <div class="skill-name">Python</div>
+      <div class="skill-desc">Análise de dados com Pandas, visualizações com Matplotlib e automação de processos repetitivos.</div>
+      <div class="skill-level"><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot"></div><div class="level-dot"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">— 02</div>
+      <div class="skill-name">SQL</div>
+      <div class="skill-desc">Consultas avançadas, joins complexos, aggregations e extracção de insights de bases de dados relacionais.</div>
+      <div class="skill-level"><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">— 03</div>
+      <div class="skill-name">Power BI</div>
+      <div class="skill-desc">Dashboards interactivos, DAX para métricas personalizadas e relatórios visuais para tomada de decisão.</div>
+      <div class="skill-level"><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot"></div><div class="level-dot"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">— 04</div>
+      <div class="skill-name">Excel</div>
+      <div class="skill-desc">Tabelas dinâmicas, fórmulas avançadas, macros e modelagem financeira em ambiente corporativo.</div>
+      <div class="skill-level"><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">— 05</div>
+      <div class="skill-name">Tableau</div>
+      <div class="skill-desc">Visualizações analíticas e storytelling com dados para comunicar resultados a stakeholders não técnicos.</div>
+      <div class="skill-level"><div class="level-dot active"></div><div class="level-dot active"></div><div class="level-dot"></div><div class="level-dot"></div><div class="level-dot"></div></div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-icon">— 06</div>
+      <div class="skill-name">Em Evolução</div>
+      <div class="skill-desc">Aprendizado contínuo em Machine Learning, estatística aplicada e novas ferramentas do ecossistema de dados.</div>
+      <div class="skill-level"><div class="level-dot active"></div><div class="level-dot"></div><div class="level-dot"></div><div class="level-dot"></div><div class="level-dot"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projetos" class="projetos">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Projectos <em>em destaque</em></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projetos-grid">
+    <div class="projeto-card reveal">
+      <div class="projeto-num">Projecto 001</div>
+      <h3 class="projeto-title">Dashboard de Vendas</h3>
+      <p class="projeto-desc">Análise completa de performance comercial com KPIs dinâmicos, segmentação regional e comparativo mensal em Power BI.</p>
+      <div class="projeto-tags"><span class="projeto-tag">Power BI</span><span class="projeto-tag">DAX</span><span class="projeto-tag">Excel</span></div>
+      <a href="#" class="projeto-link">Ver projecto</a>
+    </div>
+    <div class="projeto-card reveal">
+      <div class="projeto-num">Projecto 002</div>
+      <h3 class="projeto-title">Análise de Churn</h3>
+      <p class="projeto-desc">Identificação de padrões de abandono de clientes com Python e Pandas, com visualizações que revelam factores-chave de retenção.</p>
+      <div class="projeto-tags"><span class="projeto-tag">Python</span><span class="projeto-tag">Pandas</span><span class="projeto-tag">Matplotlib</span></div>
+      <a href="#" class="projeto-link">Ver projecto</a>
+    </div>
+    <div class="projeto-card reveal">
+      <div class="projeto-num">Projecto 003</div>
+      <h3 class="projeto-title">Relatório SQL Financeiro</h3>
+      <p class="projeto-desc">Extracção e tratamento de dados financeiros com queries SQL complexas para suporte à tomada de decisão executiva.</p>
+      <div class="projeto-tags"><span class="projeto-tag">SQL</span><span class="projeto-tag">Tableau</span><span class="projeto-tag">Excel</span></div>
+      <a href="#" class="projeto-link">Ver projecto</a>
+    </div>
+  </div>
+</section>
+
+<div class="tools-wrap">
+  <div class="tools-strip reveal">
+    <div class="tool-item"><div class="tool-icon-text">Py</div><span class="tool-name">Python</span></div>
+    <div class="tool-item"><div class="tool-icon-text">SQL</div><span class="tool-name">SQL</span></div>
+    <div class="tool-item"><div class="tool-icon-text">BI</div><span class="tool-name">Power BI</span></div>
+    <div class="tool-item"><div class="tool-icon-text">Xl</div><span class="tool-name">Excel</span></div>
+    <div class="tool-item"><div class="tool-icon-text">Tb</div><span class="tool-name">Tableau</span></div>
+  </div>
+</div>
+
+<section id="contacto" class="contacto">
+  <div class="contact-inner">
+    <div class="reveal">
+      <p class="contact-quote">"Pronto para transformar dados em <span>valor real</span> para a sua equipa."</p>
+      <p class="contact-sub">— Vamos trabalhar juntos</p>
+    </div>
+    <div class="contact-links reveal">
+      <a href="mailto:esmael@email.com" class="contact-link">
+        <div class="contact-link-icon">@</div>
+        <span class="contact-link-label">Email</span>
+      </a>
+      <a href="https://linkedin.com/in/esmael-eduardo" target="_blank" class="contact-link">
+        <div class="contact-link-icon">in</div>
+        <span class="contact-link-label">LinkedIn</span>
+      </a>
+      <a href="https://github.com/esmael-eduardo" target="_blank" class="contact-link">
+        <div class="contact-link-icon">gh</div>
+        <span class="contact-link-label">GitHub</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Esmael Marcelino Eduardo</span>
+  <span class="footer-copy">Analista de Dados Junior · 2025</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 90);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
